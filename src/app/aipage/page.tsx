@@ -32,9 +32,13 @@ export default function AiPage() {
     formData.append("pdf", pdf);
 
     try {
-      await axios.post("http://127.0.0.1:8000/indexing", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://rag-backend-eor6.onrender.com/indexing",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       setUploaded(true);
       toast.success("Upload successful", {
         description: "PDF has been indexed.",
@@ -51,9 +55,12 @@ export default function AiPage() {
     if (!data.trim()) return;
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:8000/query", {
-        prompt: data,
-      });
+      const res = await axios.post(
+        "https://rag-backend-eor6.onrender.com/query",
+        {
+          prompt: data,
+        }
+      );
       setAnswer(res.data.answer);
       toast.success("Query answered", {
         description: "Check the result below.",
